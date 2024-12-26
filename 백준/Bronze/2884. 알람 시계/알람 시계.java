@@ -5,14 +5,15 @@ public class Main{
         int h = sc.nextInt();
         int m = sc.nextInt();
         
-        if(m>=45){
-            System.out.println(h+" "+(m-45));
+        int minute = h*60 + m;
+        minute -=45;
+        if(minute<0){
+            minute +=24*60;
         }
-        else{
-            h=h-1;
-            if(h<0){h=23;}
-            m=m+60-45;
-            System.out.println(h+" "+m);
-        }
+        
+        h=minute/60;
+        m=minute%60;
+        System.out.println(h+" "+m);
+        
     }
 }
