@@ -7,18 +7,22 @@ public class Main{
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         int t = Integer.parseInt(br.readLine());
+        int [] change = {25,10,5,1};
+
 
         for(int i = 0; i<t;i++){
             int cent = Integer.parseInt(br.readLine());
-            int q , d , n, p;
-            q = cent / 25;
-            cent %= 25;
-            d = cent / 10;
-            cent %=10;
-            n = cent / 5;
-            p = cent % 5;
+            int [] result = new int[4];
 
-            bw.write(q+" "+d+" "+n+" "+p +"\n" );
+            for(int j=0;j<change.length;j++){
+                result[j] = cent / change[j];
+                cent %= change[j];
+            }
+
+            for(int res: result){
+                bw.write(res+" ");
+            }
+            bw.write("\n");
 
         }
         br.close();
