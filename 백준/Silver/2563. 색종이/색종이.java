@@ -9,13 +9,8 @@ public class Main{
         int n = Integer.parseInt(br.readLine());
 
         int [][] arr = new int[100][100];
+        int count = 0;
 
-        for(int j=0;j<100;j++){
-            for(int k=0;k<100;k++){
-                arr[j][k] = 0;
-            }
-
-        }
         for (int i=0;i<n;i++){
             st = new StringTokenizer(br.readLine());
             int x = Integer.parseInt(st.nextToken());
@@ -23,21 +18,16 @@ public class Main{
 
             for(int j=0;j<10;j++){
                 for(int k=0;k<10;k++){
-                    arr[(y-1+j)][(x-1+k)] = 1;
+                    if(arr[(y+j)][(x+k)]==1) continue;
+                    arr[(y+j)][(x+k)] = 1;
+                    count+=1;
                 }
 
             }
         }
 
-        int sum =0;
 
-        for(int j=0;j<100;j++){
-            for(int k=0;k<100;k++){
-                sum += arr[j][k];
-            }
-        }
-
-        bw.write(sum+"");
+        bw.write(count+"");
 
         br.close();
         bw.flush();
