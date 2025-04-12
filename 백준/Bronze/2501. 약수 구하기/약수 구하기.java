@@ -9,19 +9,22 @@ public class Main{
         StringTokenizer st = new StringTokenizer(br.readLine());
         int p = Integer.parseInt(st.nextToken());
         int q = Integer.parseInt(st.nextToken());
-        ArrayList<Integer> list = new ArrayList<>();
+
+        int count = 0;
+        int answer = 0;
 
         for(int i=1;i<=p;i++){
-            if(p % i == 0) {
-                list.add(i);
+            if(p%i==0){
+                count++;
+                if(count == q){
+                    answer = i;
+                    break;
+                }
             }
         }
-
-        try {
-            bw.write(list.get(q-1)+"");
-        } catch (Exception e) {
-            bw.write(0+"");
-        }
+        
+        bw.write(answer+"");
+        
        
         bw.flush();
         bw.close();
