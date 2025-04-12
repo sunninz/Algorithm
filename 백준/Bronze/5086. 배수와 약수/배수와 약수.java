@@ -4,29 +4,21 @@ import java.io.*;
 public class Main{
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
+        
+        StringBuilder sb = new StringBuilder();
 
         while(true){
             StringTokenizer st = new StringTokenizer(br.readLine());
-            int first = Integer.parseInt(st.nextToken());
-            int secound = Integer.parseInt(st.nextToken());
-            if(first>secound){
-                if(first%secound==0) bw.write("multiple\n");
-                else bw.write("neither\n");
-            }
-            else if(first<secound){
-                if(secound%first==0) bw.write("factor\n");
-                else bw.write("neigher\n");
-            }
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            
+            if(a==0&&b==0) break;
 
-            else{
-                break;
-            }
+
+            if( b % a == 0) sb.append("factor\n");
+            else if(a % b ==0) sb.append("multiple\n");
+            else sb.append("neither\n");
         }
-
-        bw.flush();
-        bw.close();
-        br.close();
+        System.out.println(sb);
     }
 }
