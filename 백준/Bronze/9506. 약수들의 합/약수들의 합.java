@@ -13,24 +13,24 @@ public class Main{
             if(n==-1) break;
             ArrayList <Integer> list = new ArrayList<>();
 
-            for(int i=1;i<n;i++){
+            for(int i=1;i<=n/2;i++){
                 if(n%i==0) {
                     list.add(i);
                     sum+=i;
                 }
-                else{
-                    continue;
-                }
             }
+
+
             if(sum==n){
                 bw.write(n+" = ");
-                bw.write(list.get(0)+" + ");
-
-                for(int j=1;j<list.size()-1;j++){
-                    bw.write(list.get(j)+" + ");
+                
+                for(int j=0;j<list.size();j++){
+                    bw.write(list.get(j)+"");
+                    if(j<list.size()-1){
+                        bw.write(" + ");
+                    }
                 }
-
-                bw.write(list.get(list.size()-1)+"\n");
+                bw.newLine();
                 
             }else{
                 bw.write(n+ " is NOT perfect.\n");
