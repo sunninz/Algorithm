@@ -4,7 +4,6 @@ import java.io.*;
 public class Main{
     public static void main(String [] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         StringTokenizer st = new StringTokenizer(br.readLine());
         
@@ -13,28 +12,22 @@ public class Main{
 
         st = new StringTokenizer(br.readLine());
 
-        int [] arr = new int[num];
+        // 누적합 배열
+        int [] arr = new int[num+1];
 
-        // 숫자 초기화
-        for(int i=0;i<num;i++){
-            arr[i] = Integer.parseInt(st.nextToken());
+        for(int i = 1;i <= num;i++){
+            arr[i] = arr[i-1] + Integer.parseInt(st.nextToken());
         }
 
-        // 큰 수 찾기
+        // 최대값 찾기
         int max = Integer.MIN_VALUE;
-
-        for(int i = 0;i<=num-k;i++){
-            int sum = 0;
-            for(int j=i;j<i+k;j++){
-                sum += arr[j];
-            }
-            max = Math.max(max, sum);
-
+        for(int i=k;i<=num;i++){
+            max = Math.max(max, arr[i]-arr[i-k]);
         }
+
         System.out.println(max);
-        bw.flush();
+
         br.close();
-        bw.close();
     }
 
 }
