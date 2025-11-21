@@ -5,6 +5,7 @@ public class Main {
 
     static int N;
     static int[] tree;
+    static boolean[] deleted;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -13,6 +14,7 @@ public class Main {
         // 초기화
         N = Integer.parseInt(br.readLine());
         tree = new int[N];
+        deleted = new boolean[N];
 
         StringTokenizer st = new StringTokenizer(br.readLine());
 
@@ -40,22 +42,12 @@ public class Main {
      * 해당 노드의 값(removeNum)을 값으로 가지는 인덱스의 값을 100으로 지정
      */
     private static void remove(int removeNum) {
+        deleted[removeNum] = true;
 
-        Queue<Integer> queue = new LinkedList<>();
-        queue.offer(removeNum);
-
-        while (!queue.isEmpty()) {
-            int num = queue.poll();
-
-            tree[num] = 100;
-
-            for(int i = 0; i < N; i++){
-                if(tree[i] == num && tree[i] != 100){
-                    tree[i] = 100;
-                    queue.offer(i);
-                }
+        for(int i = 0; i < N; i++){
+            if(!deleted[i] && tree[i] == removeNum){
+                remove(i);
             }
-
         }
     }
 
@@ -63,23 +55,17 @@ public class Main {
         int count = 0;
 
         for(int i = 0; i < N; i++){
-            if(tree[i] == 100){
-                // 삭제된 노드임
-                continue;
-            }
-            boolean isLeaf = true;
+            if(deleted[i]) continue;
 
+            boolean isLeaf = true;
             for(int j = 0; j < N; j++){
-                // 나를 부모로 두는 다른 노드가 있음
-                if(tree[j] == i && tree[j] != 100){
+                if(!deleted[j] && tree[j] == i){
                     isLeaf = false;
                     break;
                 }
             }
 
-            if(isLeaf){
-                count++;
-            }
+            if(isLeaf) count++;
         }
 
         return count;
